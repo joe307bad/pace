@@ -10,11 +10,11 @@
 - Displaying charts using [Nivo](nivo.rocks), a data visualization library
 - Utilizing [Lodash](lodash.com) to simplify data stricture traversal
 
-## Documentation
+### Documentation
 
 ---
 
-### Backend
+## Backend
 
 #### Getting Started
 
@@ -58,7 +58,7 @@ GET /pace/graph
 
 ---
 
-### Frontend
+## Frontend
 
 #### Getting Started
 
