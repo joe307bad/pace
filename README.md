@@ -16,14 +16,14 @@
 
 ---
 
-## Backend
+## Back end
 
 #### Getting Started
 
 1. Navigate to `/API.Client`
 2. `npm i`
 3. `npm start`
-4. Project is accessible from `http://localhost:3001`
+4. Back end project is accessible from `http://localhost:3001`
 
 #### Routes
 
