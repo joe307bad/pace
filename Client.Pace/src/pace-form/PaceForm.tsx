@@ -9,13 +9,16 @@ import {
   withStyles,
   Button,
   Container,
-  Snackbar
+  Snackbar,
+  SnackbarContent,
+  IconButton
 } from '@material-ui/core';
 import { WithStyles, CSSProperties } from '@material-ui/styles';
 import { ClassKeyInferable } from '@material-ui/styles/withStyles';
 import { addMilePace } from '../shared/services/pace.service';
 import { PaceDto } from '@pace/api/src/shared/dtos';
 import { PaceSchema } from '../shared/schemas/pace.schema';
+import CloseIcon from '@material-ui/icons/Close';
 
 interface classNames {
   root: CSSProperties;
@@ -44,7 +47,7 @@ export class PaceForm extends Component<
   PaceFormState
 > {
   public readonly state = {
-    newPace: {},
+    newPace: {} as Partial<PaceDto>,
     errors: [],
     snackBarOpen: false
   };
@@ -55,10 +58,9 @@ export class PaceForm extends Component<
     >
   ) => {
     const newPace = {
-      [name]: event.target.value,
-      ...this.state.newPace
+      ...this.state.newPace,
+      [name]: event.target.value
     };
-
     this.setState(state => ({
       newPace: newPace
     }));
@@ -66,10 +68,16 @@ export class PaceForm extends Component<
 
   private _handleSubmit = () =>
     PaceSchema.validate(this.state.newPace)
-      .then(() => addMilePace(this.state.newPace))
+      .then(() => {
+        addMilePace(this.state.newPace)
+        this.setState({
+          newPace: {}
+        })
+      })
       .catch((response: { errors: [] }) =>
         this.setState({
-          errors: response.errors
+          errors: response.errors,
+          snackBarOpen: true
         })
       );
 
@@ -80,6 +88,7 @@ export class PaceForm extends Component<
 
   public render() {
     const { classes } = this.props;
+    
     return (
       <Container style={{ padding: 20 }}>
         <Paper className={classes.root}>
@@ -89,6 +98,7 @@ export class PaceForm extends Component<
             onChange={this._handleChange('currentMile')}
             margin="normal"
             variant="outlined"
+            value={this.state.newPace.currentMile || ''}
             className={classes.input}
           />
           <TextField
@@ -97,6 +107,7 @@ export class PaceForm extends Component<
             margin="normal"
             variant="outlined"
             className={classes.input}
+            value={this.state.newPace.mileTime || ''}
           />
           <Button
             onClick={this._handleSubmit}
@@ -108,14 +119,28 @@ export class PaceForm extends Component<
         </Paper>
         <Snackbar
           anchorOrigin={{
-            vertical: 'bottom',
+            vertical: 'top',
             horizontal: 'left'
           }}
           open={this.state.snackBarOpen}
           autoHideDuration={6000}
           onClose={this._closeSnackBar}
         >
-          <p>Snack bar message</p>
+          <SnackbarContent
+            style={{backgroundColor: 'darkred'}}
+            aria-describedby="client-snackbar"
+            message={this.state.errors[0]}
+            action={[
+              <IconButton
+                key="close"
+                aria-label="Close"
+                color="inherit"
+                onClick={this._closeSnackBar}
+              >
+                <CloseIcon className={classes.icon} />
+              </IconButton>
+            ]}
+          />
         </Snackbar>
       </Container>
     );

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.2.1",
+    "@material-ui/icons": "^4.2.1",
     "@nivo/axes": "^0.59.2",
     "@nivo/bump": "^0.59.1",
     "@nivo/line": "^0.59.3",

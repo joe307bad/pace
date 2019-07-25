@@ -8,3 +8,7 @@ export const getAveragePaceGraph = () =>
 
 export const addMilePace = (pace: Partial<PaceDto>) =>
   http.post<PaceDto>(API_URL, pace);
+
+export const getAllPaces = () => http.get<PaceDto>(API_URL);
+
+export const deletePace = (id: string) => http.deleteOne(API_URL, { id });
