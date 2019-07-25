@@ -10,7 +10,7 @@
 - SPA written in React and [Typescript](http://typescriptlang.org)
 - UI components and styling from [Material UI](http://material-ui.com)
 - Displaying charts using [Nivo](http://nivo.rocks), a data visualization library
-- Utilizing [Lodash](http://lodash.com) to simplify data stricture traversal
+- Utilizing [Lodash](http://lodash.com) to simplify data structure traversal
 
 ### Documentation
 
