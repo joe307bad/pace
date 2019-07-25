@@ -1,6 +1,5 @@
 # Pace
 
-![Pace](https://raw.githubusercontent.com/joe307bad/pace/master/Capture.PNG)
 
 ## A mile pace calculator written in [NestJS](nestjs.com) and [ReactJS](reactjs.org)
 
