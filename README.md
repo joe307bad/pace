@@ -1,5 +1,7 @@
 # Pace
 
+![Pace](https://raw.githubusercontent.com/joe307bad/pace/master/Capture.PNG)
+
 ## A mile pace calculator written in [NestJS](nestjs.com) and [ReactJS](reactjs.org)
 
 #### Main Technical Features
@@ -20,7 +22,7 @@
 
 1. Navigate to `/API.Client`
 2. `npm i`
-3. `npm start
+3. `npm start`
 4. Project is accessible from `http://localhost:3001`
 
 #### Routes
