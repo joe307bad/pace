@@ -28,26 +28,27 @@ function ListItemLink(props: ListItemProps<'a', { button?: true }>) {
 
 type PaceListProps = {
   paces: Partial<PaceDto>[];
+  reloadPaceData(): void;
 };
 
-export default function PaceList({ paces }: PaceListProps) {
+export default function PaceList({ paces, reloadPaceData }: PaceListProps) {
   const classes = useStyles('');
 
   return (
     <Container style={{ padding: 20 }}>
       <Paper className={classes.root}>
         <Typography variant="h4">Pace List</Typography>
-        {renderPacesList(paces)}
+        {renderPacesList(paces, reloadPaceData)}
       </Paper>
     </Container>
   );
 }
 
-const handleDelete = (id: string) => (
+const handleDelete = (id: string, reloadPaceData: () => void) => (
   event: React.MouseEvent<HTMLDivElement, MouseEvent>
-) => deletePace(id);
+) => deletePace(id).then(() => reloadPaceData());
 
-const renderPacesList = (paces: Partial<PaceDto>[]) => {
+const renderPacesList = (paces: Partial<PaceDto>[], reloadPaceData: () => void) => {
   if (!paces.length) {
     return <p>No mile paces found</p>;
   }
@@ -57,7 +58,7 @@ const renderPacesList = (paces: Partial<PaceDto>[]) => {
         <ListItem key={index}>
           <ListItemText primary={`Mile: ${pace.currentMile}`} />
           <ListItemText primary={`Pace: ${pace.mileTime}`} />
-          <ListItemSecondaryAction onClick={handleDelete(pace._id)}>
+          <ListItemSecondaryAction onClick={handleDelete(pace._id, reloadPaceData)}>
             <IconButton edge="end" aria-label="Delete">
               <DeleteIcon />
             </IconButton>

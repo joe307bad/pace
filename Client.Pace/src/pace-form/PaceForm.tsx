@@ -42,10 +42,12 @@ const styles = (theme: Theme): classNames => ({
   }
 });
 
-export class PaceForm extends Component<
-  WithStyles<ClassKeyInferable<any, any>>,
-  PaceFormState
-> {
+type PaceFormProps = {
+  classes: { [key: string]: string };
+  reloadPaceData(): void;
+};
+
+export class PaceForm extends Component<PaceFormProps, PaceFormState> {
   public readonly state = {
     newPace: {} as Partial<PaceDto>,
     errors: [],
@@ -70,9 +72,12 @@ export class PaceForm extends Component<
     PaceSchema.validate(this.state.newPace)
       .then(() => {
         addMilePace(this.state.newPace)
-        this.setState({
-          newPace: {}
-        })
+          .then(() => this.props.reloadPaceData())
+          .then(() =>
+            this.setState({
+              newPace: {}
+            })
+          );
       })
       .catch((response: { errors: [] }) =>
         this.setState({
@@ -88,7 +93,7 @@ export class PaceForm extends Component<
 
   public render() {
     const { classes } = this.props;
-    
+
     return (
       <Container style={{ padding: 20 }}>
         <Paper className={classes.root}>
@@ -127,7 +132,7 @@ export class PaceForm extends Component<
           onClose={this._closeSnackBar}
         >
           <SnackbarContent
-            style={{backgroundColor: 'darkred'}}
+            style={{ backgroundColor: 'darkred' }}
             aria-describedby="client-snackbar"
             message={this.state.errors[0]}
             action={[

@@ -38,7 +38,7 @@ export class PaceService {
             .then(paces => paces.map(pace => ({
                 _id: pace._id,
                 currentMile: pace.currentMile,
-                mileTime: pace.mileTime
+                mileTime: pace.mileTime,
             })))
     }
 }
