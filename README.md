@@ -60,7 +60,7 @@ GET /pace/graph
 
 ---
 
-## Frontend
+## Front end
 
 #### Getting Started
 
