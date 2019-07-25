@@ -66,5 +66,5 @@ GET /pace/graph
 
 1. Navigate to `/Client.Pace`
 2. `npm i`
-3. `npm run`
+3. `npm start`
 4. Front end project is accessbible from `http://localhost:3000`
